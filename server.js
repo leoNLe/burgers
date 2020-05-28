@@ -4,7 +4,7 @@ const path = require("path");
 const router = require("./controllers/burgers_controller");
 
 const server = express();
-const PORT = process.env.PORT | 8080; 
+const PORT = process.env.PORT || 8080; 
 
 server.use( express.static(path.join(__dirname, "public")));
 server.use(express.json());
