@@ -1,0 +1,30 @@
+  <ul class="burger">
+    {{#each burgers}}
+      <li data-id="{{id}}"> <div class="name">{{burger_name}}</div><button class="devoured"> Devour</button> </li> 
+    {{/each}} 
+  </ul>
+  <ol class="devoured">
+    {{#each devoured}}
+      <li> {{burger_name}} Devoured </li>
+    {{/each}}
+  </ol>
+
+<script type="application/javascript">
+  const devoured = document.querySelectorAll(".devoured");
+  devoured.forEach(button => {
+    button.addEventListener("click", (event)=> {
+      event.preventDefault();
+      const listItem = event.target.parentNode;
+      const body = {
+        id: listItem.getAttribute("data-id")
+      };
+      axios.post("/api/eaten", body)
+        .then( (response) => {
+          location.reload();
+        })
+        .catch((err)=> {
+          console.log(err);
+        })
+    })
+  });
+</script>
